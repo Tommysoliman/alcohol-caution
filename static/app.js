@@ -58,7 +58,7 @@ function render(result) {
   setText('#category-note', result.category === 'Drunk' ? 'Please take care.' : '');
   setText('#food-effect', `Food may lower the estimated peak by up to ${result.food_reduction_percent}%. It does not remove alcohol.`);
   setText('#drink-summary', `Your drinks: ${result.drink_summary}.`);
-  setText('#calorie-total', `Approx. alcohol calories: ${result.estimated_alcohol_calories}. Mixers and cocktail recipes can add more.`);
+  setText('#calorie-total', `Approx. calories: ${result.estimated_calories}. Beer and selected cocktails include typical recipe calories; actual pours and mixers can vary.`);
   setText('#combination-food-effect', `Meal adjustment included: up to ${result.food_reduction_percent}% lower estimated peak.`);
   document.querySelector('#high-warning').hidden = targetBand.value !== 'high';
   renderCombinations(result.combinations);

@@ -10,6 +10,7 @@ app = Flask(__name__)
 
 STANDARD_DRINK_GRAMS = 14.0
 ALCOHOL_CALORIES_PER_GRAM = 7.0
+BEER_CALORIES_PER_SERVING = 140
 METABOLISM_RATE = 0.015
 MEAL_REDUCTIONS = {
     "none": 0.0,
@@ -33,19 +34,19 @@ DRINK_LABELS = {
     "cocktails": "cocktail",
 }
 COCKTAILS = {
-    "vodka_soda": ("Vodka soda", 1.0),
-    "gin_tonic": ("Gin and tonic", 1.0),
-    "rum_cola": ("Rum and cola", 1.0),
-    "tequila_soda": ("Tequila soda", 1.0),
-    "margarita": ("Margarita", 1.5),
-    "mojito": ("Mojito", 1.5),
-    "cosmopolitan": ("Cosmopolitan", 1.5),
-    "whiskey_sour": ("Whiskey sour", 1.5),
-    "espresso_martini": ("Espresso martini", 1.5),
-    "long_island": ("Long Island iced tea", 2.5),
-    "negroni": ("Negroni", 2.0),
-    "old_fashioned": ("Old fashioned", 1.5),
-    "martini": ("Martini", 2.0),
+    "vodka_soda": ("Vodka soda", 1.0, 100),
+    "gin_tonic": ("Gin and tonic", 1.0, 150),
+    "rum_cola": ("Rum and cola", 1.0, 185),
+    "tequila_soda": ("Tequila soda", 1.0, 100),
+    "margarita": ("Margarita", 1.5, 170),
+    "mojito": ("Mojito", 1.5, 170),
+    "cosmopolitan": ("Cosmopolitan", 1.5, 200),
+    "whiskey_sour": ("Whiskey sour", 1.5, 180),
+    "espresso_martini": ("Espresso martini", 1.5, 230),
+    "long_island": ("Long Island iced tea", 2.5, 425),
+    "negroni": ("Negroni", 2.0, 200),
+    "old_fashioned": ("Old fashioned", 1.5, 155),
+    "martini": ("Martini", 2.0, 140),
 }
 TARGET_BANDS = {
     "lower": (0.0, 0.02),
@@ -172,9 +173,15 @@ def calculate(data: dict[str, Any]) -> dict[str, Any]:
     total += counts["cocktails"] * COCKTAILS[cocktail_key][1]
     reduction = MEAL_REDUCTIONS[meal_size] * TIMING_MULTIPLIERS[meal_timing]
     estimate = calculate_bac(total, gender, weight, hours, reduction)
+    alcohol_calories = total * STANDARD_DRINK_GRAMS * ALCOHOL_CALORIES_PER_GRAM
+    beer_extra_calories = counts["beer"] * (BEER_CALORIES_PER_SERVING - (STANDARD_DRINK_GRAMS * ALCOHOL_CALORIES_PER_GRAM))
+    cocktail_extra_calories = counts["cocktails"] * (
+        COCKTAILS[cocktail_key][2] - (COCKTAILS[cocktail_key][1] * STANDARD_DRINK_GRAMS * ALCOHOL_CALORIES_PER_GRAM)
+    )
     return {
         "total_standard_drinks": round(total, 1),
         "estimated_alcohol_calories": round(total * STANDARD_DRINK_GRAMS * ALCOHOL_CALORIES_PER_GRAM),
+        "estimated_calories": round(alcohol_calories + beer_extra_calories + cocktail_extra_calories),
         "unadjusted_bac": round(estimate["unadjusted_bac"], 3),
         "food_adjusted_bac": round(estimate["food_adjusted_bac"], 3),
         "bac_low": round(estimate["bac_low"], 3),
