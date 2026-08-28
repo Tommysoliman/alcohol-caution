@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from itertools import product
+import os
 from typing import Any
 
 from flask import Flask, jsonify, render_template, request
@@ -200,4 +201,4 @@ def calculate_endpoint() -> tuple[Any, int] | Any:
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", "8080")), debug=True)
