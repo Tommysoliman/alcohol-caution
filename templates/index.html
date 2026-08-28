@@ -65,8 +65,8 @@
         <h2 id="drinks-title">🍹 What are you planning to drink?</h2>
         <p class="double-shot">One double shot counts as 2 drinks.</p>
         <div class="drink-grid">
-          <label>Beer <span>330–355 ml, 5% ABV; about 1 drink</span><input name="beer" type="number" value="2" min="0" max="20" step="1"></label>
-          <label>Vodka or gin <span>44 ml shot, 40% ABV; about 1 drink</span><input name="vodka_gin" type="number" value="3" min="0" max="20" step="1"></label>
+          <label>Beer <span>330–355 ml, 5% ABV; about 1 drink</span><input name="beer" type="number" value="0" min="0" max="20" step="1"></label>
+          <label>Vodka or gin <span>44 ml shot, 40% ABV; about 1 drink</span><input name="vodka_gin" type="number" value="0" min="0" max="20" step="1"></label>
           <label>Tequila <span>44 ml shot, 40% ABV; about 1 drink</span><input name="tequila" type="number" value="0" min="0" max="20" step="1"></label>
           <label>Whisky <span>44 ml shot, 40% ABV; about 1 drink</span><input name="whisky" type="number" value="0" min="0" max="20" step="1"></label>
           <label>Wine or champagne <span>150 ml, 12% ABV; about 1 drink</span><input name="wine" type="number" value="0" min="0" max="20" step="1"></label>
@@ -96,12 +96,13 @@
       </div>
       <p id="food-effect" class="food-effect"></p>
       <p id="drink-summary" class="drink-summary"></p>
+      <p id="calorie-total" class="calorie-total"></p>
     </section>
 
     <section class="card explorer" aria-labelledby="explorer-title">
       <h2 id="explorer-title">✨ Example combinations</h2>
       <p class="explorer-intro">Choose a Tipsy or Drunk estimate below to see calculated examples. These are not recommended amounts.</p>
-      <label>Educational example level
+      <label>Your goal
         <select name="target_band" form="calculator-form">
           <option value="lower">🟢 Low alcohol level</option>
           <option value="medium" selected>🟠 Tipsy</option>

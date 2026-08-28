@@ -9,6 +9,7 @@ from flask import Flask, jsonify, render_template, request
 app = Flask(__name__)
 
 STANDARD_DRINK_GRAMS = 14.0
+ALCOHOL_CALORIES_PER_GRAM = 7.0
 METABOLISM_RATE = 0.015
 MEAL_REDUCTIONS = {
     "none": 0.0,
@@ -173,6 +174,7 @@ def calculate(data: dict[str, Any]) -> dict[str, Any]:
     estimate = calculate_bac(total, gender, weight, hours, reduction)
     return {
         "total_standard_drinks": round(total, 1),
+        "estimated_alcohol_calories": round(total * STANDARD_DRINK_GRAMS * ALCOHOL_CALORIES_PER_GRAM),
         "unadjusted_bac": round(estimate["unadjusted_bac"], 3),
         "food_adjusted_bac": round(estimate["food_adjusted_bac"], 3),
         "bac_low": round(estimate["bac_low"], 3),
