@@ -51,14 +51,14 @@ function renderCombinations(items) {
 
 function render(result) {
   setText('#total-drinks', result.total_standard_drinks);
-  setText('#bac-range', `${formatBac(result.bac_low)}–${formatBac(result.bac_high)}`);
+  setText('#bac-value', formatBac(result.food_adjusted_bac));
   const category = document.querySelector('#category');
   category.textContent = `${categoryEmoji[result.category]} ${result.category}`;
   category.className = result.category.includes('Low') ? 'lower' : result.category.includes('high') || result.category === 'Drunk' ? 'danger' : 'caution';
   setText('#category-note', result.category === 'Drunk' ? 'Please take care.' : '');
   setText('#food-effect', `Food may lower the estimated peak by up to ${result.food_reduction_percent}%. It does not remove alcohol.`);
   setText('#drink-summary', `Your drinks: ${result.drink_summary}.`);
-  setText('#calorie-total', `Approx. calories: ${result.estimated_calories}. Beer and selected cocktails include typical recipe calories; actual pours and mixers can vary.`);
+  setText('#calorie-total', result.estimated_calories);
   setText('#combination-food-effect', `Meal adjustment included: up to ${result.food_reduction_percent}% lower estimated peak.`);
   document.querySelector('#high-warning').hidden = targetBand.value !== 'high';
   renderCombinations(result.combinations);
