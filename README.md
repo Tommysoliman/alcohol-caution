@@ -40,7 +40,7 @@ pip install -r requirements.txt
 python app.py
 ```
 
-Open [http://127.0.0.1:5000](http://127.0.0.1:5000) in a browser. Stop the server with `Ctrl+C`.
+Open [http://127.0.0.1:8080](http://127.0.0.1:8080) in a browser. Stop the server with `Ctrl+C`.
 
 ## Calculation
 
