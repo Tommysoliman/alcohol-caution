@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="An educational BAC estimator for mixed drinks, time, and food.">
+  <title>Drink Pace Guide</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <main class="page-shell">
+    <header class="site-header">
+      <p class="eyebrow">Educational BAC estimator</p>
+      <h1>Drink Pace Guide</h1>
+      <p>Estimate how mixed drinks, time and food may affect your BAC.</p>
+    </header>
+
+    <p class="warning-banner">Do not use this estimate to decide whether to drive. If you drink, arrange another way home.</p>
+    <p class="disclaimer">This tool is not medical advice. It cannot guarantee BAC or how a person will feel.</p>
+
+    <form id="calculator-form" novalidate>
+      <section class="card" aria-labelledby="details-title">
+        <h2 id="details-title">Personal details</h2>
+        <div class="input-grid details-grid">
+          <label>Gender
+            <select name="gender">
+              <option value="male" selected>Male</option>
+              <option value="female">Female</option>
+            </select>
+          </label>
+          <label>Weight <span>kilograms</span>
+            <input name="weight" type="number" value="63" min="30" max="250" step="0.1" required>
+          </label>
+          <label>Drinking duration <span>hours</span>
+            <input name="duration" type="number" value="3" min="0.25" max="24" step="0.25" required>
+          </label>
+        </div>
+      </section>
+
+      <section class="card" aria-labelledby="food-title">
+        <h2 id="food-title">Food before drinking</h2>
+        <div class="input-grid two-column">
+          <label>Meal size
+            <select name="meal_size">
+              <option value="none">No food</option>
+              <option value="light">Light snack</option>
+              <option value="regular" selected>Regular meal</option>
+              <option value="heavy">Heavy meal</option>
+            </select>
+          </label>
+          <label>Time between meal and first drink
+            <select name="meal_timing">
+              <option value="while_drinking">While drinking</option>
+              <option value="under_1_hour" selected>Less than 1 hour</option>
+              <option value="one_to_two_hours">1–2 hours</option>
+              <option value="two_to_three_hours">2–3 hours</option>
+              <option value="over_3_hours">More than 3 hours</option>
+            </select>
+          </label>
+        </div>
+        <p class="context-note">Food may delay absorption and potentially lower the peak. This is a rough absorption model: food does not remove alcohol or guarantee sobriety.</p>
+      </section>
+
+      <section class="card" aria-labelledby="drinks-title">
+        <h2 id="drinks-title">What are you planning to drink?</h2>
+        <p class="double-shot">One double shot counts as 2 drinks.</p>
+        <div class="drink-grid">
+          <label>Beer <span>330–355 ml, 5% ABV; about 1 drink</span><input name="beer" type="number" value="2" min="0" max="20" step="1"></label>
+          <label>Vodka or gin <span>44 ml shot, 40% ABV; about 1 drink</span><input name="vodka_gin" type="number" value="3" min="0" max="20" step="1"></label>
+          <label>Tequila <span>44 ml shot, 40% ABV; about 1 drink</span><input name="tequila" type="number" value="0" min="0" max="20" step="1"></label>
+          <label>Whisky <span>44 ml shot, 40% ABV; about 1 drink</span><input name="whisky" type="number" value="0" min="0" max="20" step="1"></label>
+          <label>Wine or champagne <span>150 ml, 12% ABV; about 1 drink</span><input name="wine" type="number" value="0" min="0" max="20" step="1"></label>
+          <div class="cocktail-input"><label>Cocktail
+            <select name="cocktail_type">
+              {% for key, cocktail in cocktails.items() %}<option value="{{ key }}">{{ cocktail[0] }} — {{ cocktail[1] }} standard drink{{ 's' if cocktail[1] != 1 else '' }}</option>{% endfor %}
+            </select>
+          </label><label>Count<input name="cocktails" type="number" value="0" min="0" max="20" step="1"></label></div>
+        </div>
+      </section>
+
+      <div class="form-actions">
+        <button class="primary-button" type="submit">Calculate estimate</button>
+        <button class="secondary-button" type="reset">Reset</button>
+      </div>
+    </form>
+
+    <p id="form-error" class="form-error" role="alert" hidden></p>
+
+    <section class="card results" aria-labelledby="results-title" aria-live="polite">
+      <h2 id="results-title">Your estimate</h2>
+      <p class="bac-definition">BAC is the estimated percentage of alcohol in your bloodstream. This is an estimate, not a measurement.</p>
+      <div class="result-grid">
+        <div><span>Total standard drinks</span><strong id="total-drinks">—</strong></div>
+        <div><span>Estimated BAC range</span><strong id="bac-range">—</strong></div>
+        <div><span>Alcohol level</span><strong id="category">—</strong><small id="category-note"></small></div>
+      </div>
+      <p id="food-effect" class="food-effect"></p>
+      <p id="drink-summary" class="drink-summary"></p>
+    </section>
+
+    <section class="card explorer" aria-labelledby="explorer-title">
+      <h2 id="explorer-title">Example combinations</h2>
+      <p class="explorer-intro">Choose a Tipsy or Drunk estimate below to see calculated examples. These are not recommended amounts.</p>
+      <label>Educational example level
+        <select name="target_band" form="calculator-form">
+          <option value="lower">🟢 Low alcohol level</option>
+          <option value="medium" selected>🟠 Tipsy</option>
+          <option value="high">🔴 Drunk</option>
+        </select>
+      </label>
+      <p class="context-note">These are estimated examples only, not a challenge or a target. Different people can be affected very differently.</p>
+      <p id="combination-food-effect" class="combination-food-effect"></p>
+      <p id="high-warning" class="high-warning" hidden>⚠️ This range can mean much slower reactions, poor coordination and worse judgement. It carries substantially increased risk; these examples are informational, not a drinking target.</p>
+      <div id="combination-list" class="combination-list"></div>
+    </section>
+
+    <details class="sources">
+      <summary>Sources and limitations</summary>
+      <ul>
+        <li><a href="https://www.niaaa.nih.gov/alcohols-effects-health/what-standard-drink" target="_blank" rel="noreferrer">NIAAA standard drink</a></li>
+        <li><a href="https://www.cdc.gov/alcohol/standard-drink-sizes/index.html" target="_blank" rel="noreferrer">CDC standard drink sizes</a></li>
+        <li><a href="https://www.niaaa.nih.gov/alcohols-effects-health/alcohol-drinking-patterns" target="_blank" rel="noreferrer">NIAAA alcohol drinking patterns</a></li>
+        <li><a href="https://www.niaaa.nih.gov/publications/brochures-and-fact-sheets/risky-drinking-can-put-chill-on-your-summer-fun" target="_blank" rel="noreferrer">NIAAA food and absorption information</a></li>
+      </ul>
+      <p>One U.S. standard drink contains approximately 14 grams of pure alcohol. Cocktail alcohol content varies considerably by recipe and pour size. Food can delay absorption, but its effect varies. BAC estimates cannot precisely predict behaviour or subjective feelings, and people can be impaired before they feel drunk.</p>
+      <p>The model must not be used to determine whether someone can drive. The only reliable way to know BAC is through appropriate testing.</p>
+      <p><strong>Emergency warning:</strong> Anyone who is difficult to wake, vomiting repeatedly, breathing slowly or irregularly, confused, having seizures, or showing pale/blue skin may have alcohol poisoning. Contact emergency services immediately and do not leave them alone.</p>
+    </details>
+  </main>
+  <script src="{{ url_for('static', filename='app.js') }}" defer></script>
+</body>
+</html>
