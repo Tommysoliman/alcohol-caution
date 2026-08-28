@@ -20,9 +20,9 @@
 
     <form id="calculator-form" novalidate>
       <section class="card" aria-labelledby="details-title">
-        <h2 id="details-title">Personal details</h2>
+        <h2 id="details-title">👤 Personal details</h2>
         <div class="input-grid details-grid">
-          <label>Gender
+          <label>Gender <span>Male / female</span>
             <select name="gender">
               <option value="male" selected>Male</option>
               <option value="female">Female</option>
@@ -38,7 +38,7 @@
       </section>
 
       <section class="card" aria-labelledby="food-title">
-        <h2 id="food-title">Food before drinking</h2>
+        <h2 id="food-title">🍽️ Food before drinking</h2>
         <div class="input-grid two-column">
           <label>Meal size
             <select name="meal_size">
@@ -62,7 +62,7 @@
       </section>
 
       <section class="card" aria-labelledby="drinks-title">
-        <h2 id="drinks-title">What are you planning to drink?</h2>
+        <h2 id="drinks-title">🍹 What are you planning to drink?</h2>
         <p class="double-shot">One double shot counts as 2 drinks.</p>
         <div class="drink-grid">
           <label>Beer <span>330–355 ml, 5% ABV; about 1 drink</span><input name="beer" type="number" value="2" min="0" max="20" step="1"></label>
@@ -87,7 +87,7 @@
     <p id="form-error" class="form-error" role="alert" hidden></p>
 
     <section class="card results" aria-labelledby="results-title" aria-live="polite">
-      <h2 id="results-title">Your estimate</h2>
+      <h2 id="results-title">📊 Your estimate</h2>
       <p class="bac-definition">BAC is the estimated percentage of alcohol in your bloodstream. This is an estimate, not a measurement.</p>
       <div class="result-grid">
         <div><span>Total standard drinks</span><strong id="total-drinks">—</strong></div>
@@ -99,7 +99,7 @@
     </section>
 
     <section class="card explorer" aria-labelledby="explorer-title">
-      <h2 id="explorer-title">Example combinations</h2>
+      <h2 id="explorer-title">✨ Example combinations</h2>
       <p class="explorer-intro">Choose a Tipsy or Drunk estimate below to see calculated examples. These are not recommended amounts.</p>
       <label>Educational example level
         <select name="target_band" form="calculator-form">
