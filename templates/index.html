@@ -14,7 +14,7 @@
       <p>Estimate how mixed drinks, time and food may affect your blood alcohol concentration (BAC).</p>
     </header>
 
-    <p class="warning-banner">Do not use this estimate to decide whether to drive. If you drink, arrange another way home.</p>
+    <p class="warning-banner">Do not use this estimate to decide whether to drive. If you drink, arrange another way home. ⚠️</p>
     <p class="disclaimer">This tool is not medical advice. It cannot guarantee BAC or how a person will feel.</p>
 
     <form id="calculator-form" novalidate>
@@ -86,7 +86,7 @@
     <p id="form-error" class="form-error" role="alert" hidden></p>
 
     <section class="card results" aria-labelledby="results-title" aria-live="polite">
-      <h2 id="results-title">📊 Your estimate</h2>
+      <h2 id="results-title">📊 Your drinking result</h2>
       <p class="bac-definition"><strong>Blood alcohol concentration (BAC)</strong> is the estimated amount of alcohol in your bloodstream, not in your drinks.</p>
       <div class="result-grid">
         <div><span>Total standard drinks</span><strong id="total-drinks">—</strong></div>
@@ -101,7 +101,7 @@
     <section class="card explorer" aria-labelledby="explorer-title">
       <h2 id="explorer-title">✨ Example combinations</h2>
       <p class="explorer-intro">Choose your drinking goal to get your mix. These are not recommended amounts.</p>
-      <label>Choose your drinking goal for tonight
+      <label aria-label="Choose your drinking goal">
         <select name="target_band" form="calculator-form">
           <option value="" selected disabled>Choose your Goal</option>
           <option value="lower">🟢 Low alcohol level</option>
@@ -109,8 +109,12 @@
           <option value="high">🔴 Drunk</option>
         </select>
       </label>
-      <p class="context-note">These are estimated examples only, not a challenge or a target. Different people can be affected very differently.</p>
-      <p id="combination-food-effect" class="combination-food-effect"></p>
+      <ul class="explorer-notes">
+        <li>Be cautious when choosing Drunk; drinking less than this level is preferred. ⚠️</li>
+        <li id="combination-food-effect"></li>
+        <li>These are estimated examples only, not a challenge or a target. Different people can be affected very differently.</li>
+        <li>Never drink and drive.</li>
+      </ul>
       <p id="high-warning" class="high-warning" hidden>⚠️ This range can mean much slower reactions, poor coordination and worse judgement. It carries substantially increased risk; these examples are informational, not a drinking target.</p>
       <div id="combination-list" class="combination-list"></div>
     </section>
@@ -124,7 +128,7 @@
         <li><a href="https://www.niaaa.nih.gov/publications/brochures-and-fact-sheets/risky-drinking-can-put-chill-on-your-summer-fun" target="_blank" rel="noreferrer">NIAAA food and absorption information</a></li>
       </ul>
       <p>One U.S. standard drink contains approximately 14 grams of pure alcohol. Cocktail alcohol content varies considerably by recipe and pour size. Food can delay absorption, but its effect varies. BAC estimates cannot precisely predict behaviour or subjective feelings, and people can be impaired before they feel drunk.</p>
-      <p>The model must not be used to determine whether someone can drive. The only reliable way to know BAC is through appropriate testing.</p>
+      <p>The model must not be used to determine whether someone can drive. Never drink and drive. The only reliable way to know BAC is through appropriate testing.</p>
       <p><strong>Emergency warning:</strong> Anyone who is difficult to wake, vomiting repeatedly, breathing slowly or irregularly, confused, having seizures, or showing pale/blue skin may have alcohol poisoning. Contact emergency services immediately and do not leave them alone.</p>
     </details>
   </main>
