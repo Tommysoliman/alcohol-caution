@@ -31,7 +31,7 @@
             <input name="weight" type="number" value="63" min="30" max="250" step="0.1" required>
           </label>
           <label>Drinking duration <span>hours</span>
-            <input name="duration" type="number" value="3" min="0.25" max="24" step="0.25" required>
+            <input name="duration" type="number" value="3" min="0.5" max="24" step="0.5" required>
           </label>
         </div>
       </section>
@@ -119,6 +119,20 @@
       <div id="combination-list" class="combination-list"></div>
     </section>
 
+    <section class="card harm-reduction" aria-labelledby="harm-reduction-title">
+      <h2 id="harm-reduction-title">🛡️ Reduce alcohol-related harm</h2>
+      <ul class="harm-reduction-list">
+        <li>🍽️ Have healthy food or snacks before and while drinking. Food can slow alcohol absorption and reduce stomach irritation, but it does not make drinking or driving safe.</li>
+        <li>💧 Alcohol and heat can both cause fluid loss. Mild dehydration can contribute to thirst, fatigue, and headache; choose alcohol-free drinks such as water, juice, or sparkling water.</li>
+        <li>🧃 Electrolyte drinks have not been proven to reduce hangover severity, and they do not lower BAC or make driving safe.</li>
+        <li>😴 Alcohol can disrupt sleep and contribute to fatigue the next day.</li>
+        <li>⏳ There is no quick hangover cure. Coffee, showers, and drinking more alcohol do not speed recovery; time is needed.</li>
+        <li>☀️ Avoid drinking in hot conditions, and use sunscreen if you are outdoors. Alcohol can worsen heat-related illness and can make sunburn more likely.</li>
+        <li>🚗 Plan a safe way home before drinking. Never drink and drive.</li>
+        <li>🚑 Call emergency services if someone is difficult to wake, is vomiting repeatedly, has slow or irregular breathing, is confused, or has a seizure.</li>
+      </ul>
+    </section>
+
     <details class="sources">
       <summary>Sources and limitations</summary>
       <ul>
@@ -126,8 +140,19 @@
         <li><a href="https://www.cdc.gov/alcohol/standard-drink-sizes/index.html" target="_blank" rel="noreferrer">CDC standard drink sizes</a></li>
         <li><a href="https://www.niaaa.nih.gov/alcohols-effects-health/alcohol-drinking-patterns" target="_blank" rel="noreferrer">NIAAA alcohol drinking patterns</a></li>
         <li><a href="https://www.niaaa.nih.gov/publications/brochures-and-fact-sheets/risky-drinking-can-put-chill-on-your-summer-fun" target="_blank" rel="noreferrer">NIAAA food and absorption information</a></li>
+        <li><a href="https://www.niaaa.nih.gov/publications/brochures-and-fact-sheets/hangovers" target="_blank" rel="noreferrer">NIAAA hangover information</a></li>
+        <li><a href="https://pubmed.ncbi.nlm.nih.gov/28264569/" target="_blank" rel="noreferrer">PubMed reference on the Widmark equation</a></li>
+        <li><a href="https://pubmed.ncbi.nlm.nih.gov/42524898/" target="_blank" rel="noreferrer">PubMed randomized trial on food and alcohol absorption</a></li>
       </ul>
       <p>One U.S. standard drink contains approximately 14 grams of pure alcohol. Cocktail alcohol content varies considerably by recipe and pour size. Food can delay absorption, but its effect varies. BAC estimates cannot precisely predict behaviour or subjective feelings, and people can be impaired before they feel drunk.</p>
+      <p><strong>Calculation method:</strong> This educational estimate uses a simplified Widmark-style formula.</p>
+      <div class="formula-block" aria-label="BAC estimate formula">
+        <p>Alcohol grams = standard drinks × 14</p>
+        <p>Initial BAC = (alcohol grams ÷ (weight in kilograms × 1,000 × r)) × 100</p>
+        <p>Estimated BAC = max(0, initial BAC − (0.015 × drinking hours)) × (1 − food adjustment)</p>
+      </div>
+      <p><strong>Formula inputs:</strong> r is 0.68 for male and 0.55 for female. The app subtracts 0.015 BAC per hour, then applies the food adjustment.</p>
+      <p><strong>Food adjustment:</strong> This is a simplified educational estimate, not a clinically validated fixed BAC correction. A randomized trial of specific meals found approximately 30% lower alcohol exposure over time compared with fasting; individual results and peak BAC effects vary.</p>
       <p>The model must not be used to determine whether someone can drive. Never drink and drive. The only reliable way to know BAC is through appropriate testing.</p>
       <p><strong>Emergency warning:</strong> Anyone who is difficult to wake, vomiting repeatedly, breathing slowly or irregularly, confused, having seizures, or showing pale/blue skin may have alcohol poisoning. Contact emergency services immediately and do not leave them alone.</p>
     </details>

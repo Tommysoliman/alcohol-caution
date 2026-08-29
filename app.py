@@ -157,7 +157,7 @@ def calculate(data: dict[str, Any]) -> dict[str, Any]:
     if gender not in {"male", "female"}:
         raise ValueError("Gender must be male or female.")
     weight = number(data, "weight", 30, 250)
-    hours = number(data, "duration", 0.25, 24)
+    hours = number(data, "duration", 0.5, 24)
     meal_size = data.get("meal_size")
     meal_timing = data.get("meal_timing")
     cocktail_key = data.get("cocktail_type")

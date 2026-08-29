@@ -54,7 +54,7 @@ unadjusted_bac = max(0, initial_bac - (0.015 * drinking_hours))
 food_adjusted_peak = unadjusted_bac * (1 - food_reduction)
 ```
 
-Food reduction is based on meal size and the time between the meal and first drink. It is displayed as a peak adjustment and paired with a plus/minus 20% uncertainty range. Height and age are recorded for context but are not used for a pretend-precise adjustment.
+Food adjustment is a simplified educational estimate based on meal size and the time between the meal and first drink; it is not a clinically validated fixed BAC correction. A randomized trial of specific meals found approximately 30% lower alcohol exposure over time compared with fasting, but individual results and peak BAC effects vary. The app pairs its estimate with a plus/minus 20% uncertainty range. Height and age are recorded for context but are not used for a pretend-precise adjustment.
 
 ## Limitations and safety
 
@@ -62,4 +62,4 @@ This calculator is an educational model only. Cocktail recipes and pours vary, f
 
 Never use this estimate to decide whether it is safe to drive or perform other risky activities. The only reliable way to know BAC is appropriate testing. If someone is difficult to wake, vomiting repeatedly, breathing slowly or irregularly, confused, having seizures, or has pale/blue skin, contact emergency services immediately and do not leave them alone.
 
-Sources are linked in the app: NIAAA standard drink guidance, CDC standard drink sizes, NIAAA alcohol drinking patterns, and NIAAA food and absorption information.
+Sources are linked in the app: NIAAA standard drink guidance, CDC standard drink sizes, NIAAA alcohol drinking patterns, NIAAA food and absorption information, NIAAA hangover information, a PubMed reference on the Widmark equation, and a PubMed randomized trial on food and alcohol absorption: Staudt et al., "Optimized food: A strategy for reducing blood alcohol concentration" (2026), https://pubmed.ncbi.nlm.nih.gov/42524898/.
