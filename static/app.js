@@ -32,6 +32,12 @@ function setText(id, text) {
 function renderCombinations(items) {
   const list = document.querySelector('#combination-list');
   list.replaceChildren();
+  if (!targetBand.value) {
+    const message = document.createElement('p');
+    message.textContent = 'Choose a goal to see example combinations.';
+    list.append(message);
+    return;
+  }
   if (!items.length) {
     const message = document.createElement('p');
     message.textContent = 'No examples are shown for this range because the estimate would be dangerously high.';

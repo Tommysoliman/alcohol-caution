@@ -165,7 +165,8 @@ def calculate(data: dict[str, Any]) -> dict[str, Any]:
         raise ValueError("Choose a valid meal size and meal timing.")
     if cocktail_key not in COCKTAILS:
         raise ValueError("Choose a valid cocktail.")
-    if data.get("target_band") not in TARGET_BANDS:
+    target_band = data.get("target_band")
+    if target_band not in TARGET_BANDS and target_band != "":
         raise ValueError("Choose a valid target band.")
 
     counts = {name: whole_count(data, name) for name in DRINK_LABELS}
@@ -189,7 +190,7 @@ def calculate(data: dict[str, Any]) -> dict[str, Any]:
         "food_reduction_percent": round(reduction * 100, 1),
         "category": category_for(estimate["food_adjusted_bac"]),
         "drink_summary": summary_for(counts, cocktail_key),
-        "combinations": combinations(data, gender, weight, hours, reduction, cocktail_key),
+        "combinations": combinations(data, gender, weight, hours, reduction, cocktail_key) if target_band else [],
     }
 
 
